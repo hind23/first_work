@@ -179,7 +179,7 @@ let result = 0;
   h2.textContent= "Voici le montant à payer TAP avec optimisation fiscale :"+final + "DA \n";
   h2.style.whiteSpace = "pre-line";
 
-  h2.textContent+= "Voici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.15  + "DA";
+  h2.textContent+= "\nVoici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.15  + "DA";
   document.body.appendChild(h2);
   saisir.style.visibility = 'hidden';
   div.innerHTML='';
