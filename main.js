@@ -34,7 +34,7 @@ show_table_button.addEventListener('click',()=>
   h2.style.padding='25px';
   h2.style.textAlign='center';
   h2.style.borderRadius='15px';
-  h2.textContent= "Voici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.15  + "DA";
+  h2.textContent= "Voici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.015  + "DA";
   document.body.appendChild(h2);
   saisir.style.visibility = 'hidden';
   }
@@ -79,9 +79,9 @@ if(i!=current)
 }
 console.log(oui[current].checked);
 let obj = {reduction,current}
-if(!reductions.includes(obj))
+if (!reductions.some(item => item.reduction === obj.reduction && item.current === obj.current)) 
 {
-reductions.push(obj);
+  reductions.push(obj);
 }
 }
 
@@ -141,6 +141,8 @@ send_data.onclick=()=>
   p.style.fontSize='17px';
   div.appendChild(p);   
    let inputs=new Array();
+   var uniqueArray = [...new Set(reductions)];
+   console.log(uniqueArray);
   for(var i=0; i<reductions.length; i++)
   {
     if((oui[reductions[i].current].checked))
@@ -168,7 +170,7 @@ let result = 0;
        x=  parseInt(inputs[i].value) +x
  result+= ((100- parseInt(inputs[i].dataset.val_red))/100)*parseInt(inputs[i].value);
       }        
-      let final=(CAG-x+result)*0.15;
+      let final=(CAG-x+result)*0.015;
       console.log(final);
       let h2=document.createElement("h2");
   h2.style.backgroundColor='darkblue';
@@ -179,7 +181,7 @@ let result = 0;
   h2.textContent= "Voici le montant à payer TAP avec optimisation fiscale :"+final + "DA \n";
   h2.style.whiteSpace = "pre-line";
 
-  h2.textContent+= "\nVoici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.15  + "DA";
+  h2.textContent+= "\nVoici le montant à payer TAP sans optimisation fiscale :"+parseInt(document.querySelector('.CAG').value)*0.015  + "DA";
   document.body.appendChild(h2);
   saisir.style.visibility = 'hidden';
   div.innerHTML='';
